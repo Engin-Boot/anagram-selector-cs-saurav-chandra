@@ -31,5 +31,21 @@ namespace Anagram.Tests
             Assert.True(selection.SequenceEqual(
                 new List<string>{"stream", "maters"}));
         }
+        [Fact]
+        public void RecognizeAnagramsInAnyCase()
+        {
+            //if words are in different cases(upper or lower case)
+            AnagramSelector selector = new AnagramSelector();
+            Assert.True(selector.WordPairIsAnagram("caMELcAse", "CaSEMelCa"));
+        }
+        [Fact]
+        public void WhenNoAnagramInListThenShowEmptyList()
+        {
+            AnagramSelector selector = new AnagramSelector();
+            var selection = selector.SelectAnagrams("nothing",
+                new List<string> { "balance", "everything", "fast" });
+            Assert.True(selection.SequenceEqual(
+                new List<string> { }));
+        }
     }
 }
